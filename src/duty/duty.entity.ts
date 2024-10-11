@@ -8,12 +8,12 @@ import {
     OneToMany,
 } from "typeorm";
 
-enum DutyFrequency {
+export enum DutyFrequency {
     DAILY = "daily",
     WEEKLY = "weekly",
 }
 
-enum Day {
+export enum Day {
     MONDAY = "Monday",
     TUESDAY = "Tuesday",
     WEDNESDAY = "Wednesday",
@@ -33,7 +33,9 @@ export class Duty {
 
     @Column({
         nullable: false,
-        type: "text",
+        type: "varchar",
+        unique: true,
+        length: 200,
     })
     title: string;
 
