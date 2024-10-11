@@ -1,7 +1,7 @@
 import { Controller } from "@nestjs/common";
 import { ReportDutyService } from "./report-duty.service";
 
-@Controller()
+@Controller('report-duty')
 export class ReportDutyController {
     constructor(
         private readonly reportDutyService: ReportDutyService

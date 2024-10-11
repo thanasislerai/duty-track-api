@@ -1,7 +1,7 @@
 import { Controller } from "@nestjs/common";
 import { LeaveService } from "./leave.service";
 
-@Controller()
+@Controller('leave')
 export class LeaveController {
     constructor(
         private readonly leaveService: LeaveService
