@@ -1,6 +1,6 @@
 import { Duty } from "../duty/duty.entity";
 import { Report } from "../report/report.entity";
-import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryColumn, UpdateDateColumn } from "typeorm";
 
 @Entity('report_duty')
 export class ReportDuty {
@@ -21,8 +21,10 @@ export class ReportDuty {
 
     // Relationships
     @ManyToOne(() => Report, (report) => report.reportDuties)
+    @JoinColumn({ name: 'reportId' })
     report: Report;
 
     @ManyToOne(() => Duty, (duty) => duty.reportDuties)
+    @JoinColumn({ name: 'dutyId' })
     duty: Duty;
 }

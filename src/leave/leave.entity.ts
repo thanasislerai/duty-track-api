@@ -19,9 +19,6 @@ export class Leave {
     @PrimaryGeneratedColumn('increment', { type: 'int', unsigned: true })
     id: number;
 
-    @Column({ type: 'bigint', unsigned: true })
-    userId: number;
-
     @Column({ type: 'date' })
     startDate: Date;
 
