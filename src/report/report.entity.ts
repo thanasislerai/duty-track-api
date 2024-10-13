@@ -7,15 +7,15 @@ import {
     ManyToOne,
     OneToMany,
     PrimaryGeneratedColumn,
-    UpdateDateColumn
+    UpdateDateColumn,
 } from "typeorm";
 
-@Entity('report')
+@Entity("report")
 export class Report {
-    @PrimaryGeneratedColumn('increment', { type: 'int', unsigned: true })
+    @PrimaryGeneratedColumn("increment", { type: "int", unsigned: true })
     id: number;
 
-    @Column({ type: 'date' })
+    @Column({ type: "date" })
     date: Date;
 
     @CreateDateColumn()

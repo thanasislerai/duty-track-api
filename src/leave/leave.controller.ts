@@ -1,9 +1,9 @@
 import { Controller } from "@nestjs/common";
 import { LeaveService } from "./leave.service";
+import { ApiTags } from "@nestjs/swagger";
 
-@Controller('leave')
+@ApiTags()
+@Controller("leave")
 export class LeaveController {
-    constructor(
-        private readonly leaveService: LeaveService
-    ) {}
+    constructor(private readonly leaveService: LeaveService) {}
 }

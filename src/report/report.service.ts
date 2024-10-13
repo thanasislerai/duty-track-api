@@ -6,6 +6,6 @@ import { Repository } from "typeorm";
 export class ReportService {
     constructor(
         @Inject("REPORT_REPOSITORY")
-        private readonly reportRepository: Repository<Report>
+        private readonly reportRepository: Repository<Report>,
     ) {}
 }

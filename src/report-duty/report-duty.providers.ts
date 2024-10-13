@@ -7,5 +7,5 @@ export const reportDutyProviders = [
         useFactory: (dataSource: DataSource) =>
             dataSource.getRepository(ReportDuty),
         inject: ["DATA_SOURCE"],
-    }
+    },
 ];

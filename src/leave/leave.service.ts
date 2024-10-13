@@ -6,6 +6,6 @@ import { Leave } from "./leave.entity";
 export class LeaveService {
     constructor(
         @Inject("LEAVE_REPOSITORY")
-        private readonly leaveRepository: Repository<Leave>
+        private readonly leaveRepository: Repository<Leave>,
     ) {}
 }

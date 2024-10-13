@@ -20,15 +20,12 @@ export enum Day {
     THURSDAY = "Thursday",
     FRIDAY = "Friday",
     SATURDAY = "Saturday",
-    SUNDAY = "Sunday"
+    SUNDAY = "Sunday",
 }
 
 @Entity()
 export class Duty {
-    @PrimaryGeneratedColumn(
-        "increment",
-        { type: "int", unsigned: true },
-    )
+    @PrimaryGeneratedColumn("increment", { type: "int", unsigned: true })
     id: number;
 
     @Column({

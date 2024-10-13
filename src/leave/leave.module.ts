@@ -7,9 +7,6 @@ import { LeaveService } from "./leave.service";
 @Module({
     imports: [DatabaseModule],
     controllers: [LeaveController],
-    providers: [
-        ...leaveProviders,
-        LeaveService
-    ],
+    providers: [...leaveProviders, LeaveService],
 })
 export class LeaveModule {}

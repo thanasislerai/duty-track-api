@@ -7,9 +7,6 @@ import { DutyController } from "./duty.controller";
 @Module({
     imports: [DatabaseModule],
     controllers: [DutyController],
-    providers: [
-        ...dutyProviders,
-        DutyService,
-    ]
+    providers: [...dutyProviders, DutyService],
 })
 export class DutyModule {}

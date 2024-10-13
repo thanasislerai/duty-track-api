@@ -1,4 +1,10 @@
-import { IsEnum, IsNotEmpty, IsString, MaxLength } from "class-validator";
+import {
+    Allow,
+    IsEnum,
+    IsNotEmpty,
+    IsString,
+    MaxLength,
+} from "class-validator";
 import { Day, DutyFrequency } from "../duty.entity";
 
 export class CreateDutyDto {
@@ -7,8 +13,9 @@ export class CreateDutyDto {
     @IsString({ message: "The duty title should be a text" })
     title: string;
 
-    @IsEnum(DutyFrequency, { message: 'A duty can either be daily or weekly' })
+    @IsEnum(DutyFrequency, { message: "A duty can either be daily or weekly" })
     frequency: DutyFrequency;
 
+    @Allow()
     weeklyOn: Day;
 }

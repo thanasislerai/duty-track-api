@@ -5,28 +5,28 @@ import {
     Entity,
     ManyToOne,
     PrimaryGeneratedColumn,
-    UpdateDateColumn
+    UpdateDateColumn,
 } from "typeorm";
 
 enum LeaveStatus {
-    REQUESTED = 'Requested',
-    APPROVED = 'Approved',
-    DECLINED = 'Declined',
+    REQUESTED = "Requested",
+    APPROVED = "Approved",
+    DECLINED = "Declined",
 }
 
-@Entity('leave')
+@Entity("leave")
 export class Leave {
-    @PrimaryGeneratedColumn('increment', { type: 'int', unsigned: true })
+    @PrimaryGeneratedColumn("increment", { type: "int", unsigned: true })
     id: number;
 
-    @Column({ type: 'date' })
+    @Column({ type: "date" })
     startDate: Date;
 
-    @Column({ type: 'date' })
+    @Column({ type: "date" })
     endDate: Date;
 
     @Column({
-        type: 'enum',
+        type: "enum",
         enum: LeaveStatus,
     })
     status: LeaveStatus;

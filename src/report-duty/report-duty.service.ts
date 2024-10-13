@@ -6,6 +6,6 @@ import { ReportDuty } from "./report-duty.entity";
 export class ReportDutyService {
     constructor(
         @Inject("REPORT_DUTY_REPOSITORY")
-        private readonly reportDutyRepository: Repository<ReportDuty>
+        private readonly reportDutyRepository: Repository<ReportDuty>,
     ) {}
 }

@@ -1,6 +1,6 @@
 import { Inject, Injectable, NotFoundException } from "@nestjs/common";
 import { Repository } from "typeorm";
-import { Day, Duty, DutyFrequency } from "./duty.entity";
+import { Duty, DutyFrequency } from "./duty.entity";
 import { CreateDutyDto } from "./dto/create-duty-dto";
 import { UpdateDutyDto } from "./dto/update-duty-dto";
 import { dutySaveErrorHandler } from "./helpers/duty-save-error-handler";
@@ -9,18 +9,18 @@ import { dutySaveErrorHandler } from "./helpers/duty-save-error-handler";
 export class DutyService {
     constructor(
         @Inject("DUTY_REPOSITORY")
-        private readonly dutyRepository: Repository<Duty>
+        private readonly dutyRepository: Repository<Duty>,
     ) {}
 
     async findAll(): Promise<Duty[]> {
-        return this.dutyRepository.find()
+        return this.dutyRepository.find();
     }
 
     async findById(id: number): Promise<Duty> {
-        const duty = await this.dutyRepository.findOne({ where: { id } })
+        const duty = await this.dutyRepository.findOne({ where: { id } });
 
         if (!duty) {
-            throw new NotFoundException(`Duty with id ${id} does not exist.`)
+            throw new NotFoundException(`Duty with id ${id} does not exist.`);
         }
 
         return duty;
@@ -28,9 +28,8 @@ export class DutyService {
 
     async createDuty(createDutyDto: CreateDutyDto): Promise<Duty> {
         try {
-            return await this.dutyRepository.save(createDutyDto)
-        }
-        catch (error) {
+            return await this.dutyRepository.save(createDutyDto);
+        } catch (error) {
             dutySaveErrorHandler(createDutyDto, error);
         }
     }
@@ -42,7 +41,7 @@ export class DutyService {
             Object.assign(duty, updateDutyDto);
 
             if (duty.frequency === DutyFrequency.DAILY) {
-                duty.weeklyOn = null
+                duty.weeklyOn = null;
             }
 
             return await this.dutyRepository.save(duty);
@@ -55,10 +54,9 @@ export class DutyService {
         const duty = await this.findById(id);
 
         if (!duty) {
-            throw new NotFoundException(`Duty with id ${id} does not exist.`)
+            throw new NotFoundException(`Duty with id ${id} does not exist.`);
         }
 
-        return await this.dutyRepository.remove(duty)
-        
+        return await this.dutyRepository.remove(duty);
     }
 }

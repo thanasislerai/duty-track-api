@@ -6,6 +6,6 @@ import { User } from "./user.entity";
 export class UserService {
     constructor(
         @Inject("USER_REPOSITORY")
-        private readonly userRepository: Repository<User>
+        private readonly userRepository: Repository<User>,
     ) {}
 }

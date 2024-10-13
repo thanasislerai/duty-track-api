@@ -1,13 +1,14 @@
-import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
-import { BadRequestException, ValidationPipe } from '@nestjs/common';
+import { NestFactory } from "@nestjs/core";
+import { AppModule } from "./app.module";
+import { ValidationPipe } from "@nestjs/common";
 
 async function bootstrap() {
     const app = await NestFactory.create(AppModule);
     app.useGlobalPipes(
-        new ValidationPipe(
-            { stopAtFirstError: true }
-        )
+        new ValidationPipe({
+            stopAtFirstError: true,
+            forbidUnknownValues: true,
+        }),
     );
     await app.listen(3000);
 }

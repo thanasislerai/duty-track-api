@@ -6,57 +6,54 @@ import {
     Entity,
     OneToMany,
     PrimaryGeneratedColumn,
-    UpdateDateColumn
+    UpdateDateColumn,
 } from "typeorm";
 
 enum Rank {
-    Private = 'Στρατιώτης',
-    LanceCorporal = 'Υποδεκανέας',
-    Corporal = 'Δεκανέας',
-    Sergeant = 'Λοχίας',
-    StaffSergeant = 'Επιλοχίας',
-    MasterSergeant = 'Αρχιλοχίας',
-    WarrantOfficer = 'Ανθυπασπιστής',
-    ReserveOfficerCadet = 'Δόκιμος Έφεδρος Αξιωματικός',
-    SecondLieutenant = 'Ανθυπολοχαγός',
-    Lieutenant = 'Υπολοχαγός',
-    Captain = 'Λοχαγός',
-    Major = 'Ταγματάρχης',
-    LieutenantColonel = 'Αντισυνταγματάρχης',
-    Colonel = 'Συνταγματάρχης',
-    Brigadier = 'Ταξίαρχος',
-    MajorGeneral = 'Υποστράτηγος',
-    LieutenantGeneral = 'Αντιστράτηγος',
-    General = 'Στρατηγός',
+    Private = "Στρατιώτης",
+    LanceCorporal = "Υποδεκανέας",
+    Corporal = "Δεκανέας",
+    Sergeant = "Λοχίας",
+    StaffSergeant = "Επιλοχίας",
+    MasterSergeant = "Αρχιλοχίας",
+    WarrantOfficer = "Ανθυπασπιστής",
+    ReserveOfficerCadet = "Δόκιμος Έφεδρος Αξιωματικός",
+    SecondLieutenant = "Ανθυπολοχαγός",
+    Lieutenant = "Υπολοχαγός",
+    Captain = "Λοχαγός",
+    Major = "Ταγματάρχης",
+    LieutenantColonel = "Αντισυνταγματάρχης",
+    Colonel = "Συνταγματάρχης",
+    Brigadier = "Ταξίαρχος",
+    MajorGeneral = "Υποστράτηγος",
+    LieutenantGeneral = "Αντιστράτηγος",
+    General = "Στρατηγός",
 }
 
-@Entity('user')
+@Entity("user")
 export class User {
-    @PrimaryGeneratedColumn('increment', { type: 'bigint', unsigned: true })
+    @PrimaryGeneratedColumn("increment", { type: "bigint", unsigned: true })
     id: number;
 
-    @Column({ type: 'varchar', length: 255 })
-    passwordHash: string;
-
-    @Column({ type: 'varchar', length: 255, unique: true })
+    @Column({ type: "varchar", length: 255, unique: true })
     ldapId: string;
 
-    @Column({ type: 'text' })
+    @Column({ type: "text" })
     name: string;
 
-    @Column({ type: 'boolean' })
+    @Column({ type: "boolean" })
     isAdmin: boolean;
 
-    @Column({ type: 'date' })
+    @Column({ type: "date", nullable: true, default: null })
     dateOfDismissal: Date;
 
     @Column({
-        type: 'enum',
+        type: "enum",
         enum: Rank,
     })
     rank: Rank;
 
-    @Column({ type: 'int' })
+    @Column({ type: "int", nullable: true, default: null })
     points: number;
 
     @CreateDateColumn()
