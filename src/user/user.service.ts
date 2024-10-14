@@ -8,4 +8,8 @@ export class UserService {
         @Inject("USER_REPOSITORY")
         private readonly userRepository: Repository<User>,
     ) {}
+
+    async findById(id: number) {
+        return await this.userRepository.findOne({ where: { id } });
+    }
 }

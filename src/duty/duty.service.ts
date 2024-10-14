@@ -1,8 +1,8 @@
 import { Inject, Injectable, NotFoundException } from "@nestjs/common";
 import { Repository } from "typeorm";
 import { Duty, DutyFrequency } from "./duty.entity";
-import { CreateDutyDto } from "./dto/create-duty-dto";
-import { UpdateDutyDto } from "./dto/update-duty-dto";
+import { CreateDutyDto } from "./dto/create-duty.dto";
+import { UpdateDutyDto } from "./dto/update-duty.dto";
 import { dutySaveErrorHandler } from "./helpers/duty-save-error-handler";
 
 @Injectable()

@@ -8,7 +8,7 @@ import {
     UpdateDateColumn,
 } from "typeorm";
 
-enum LeaveStatus {
+export enum LeaveStatus {
     REQUESTED = "Requested",
     APPROVED = "Approved",
     DECLINED = "Declined",

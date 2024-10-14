@@ -1,7 +1,7 @@
 import { BadRequestException } from "@nestjs/common";
-import { CreateDutyDto } from "../dto/create-duty-dto";
+import { CreateDutyDto } from "../dto/create-duty.dto";
 import { Day, DutyFrequency } from "../duty.entity";
-import { UpdateDutyDto } from "../dto/update-duty-dto";
+import { UpdateDutyDto } from "../dto/update-duty.dto";
 
 const isWeekDay = (day: string) =>
     Object.keys(Day)
