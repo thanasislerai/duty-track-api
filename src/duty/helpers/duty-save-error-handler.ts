@@ -8,6 +8,27 @@ const isWeekDay = (day: string) =>
         .map((k) => Day[k])
         .includes(day);
 
+export const getDayFromString = (day: string): Day => {
+    switch (day) {
+        case "Monday":
+            return Day.MONDAY;
+        case "Tuesday":
+            return Day.TUESDAY;
+        case "Wednesday":
+            return Day.WEDNESDAY;
+        case "Thursday":
+            return Day.THURSDAY;
+        case "Friday":
+            return Day.FRIDAY;
+        case "Saturday":
+            return Day.SATURDAY;
+        case "Sunday":
+            return Day.SUNDAY;
+        default:
+            throw new BadRequestException("Invalid day");
+    }
+};
+
 export const dutySaveErrorHandler = (
     dto: CreateDutyDto | UpdateDutyDto,
     error: any,

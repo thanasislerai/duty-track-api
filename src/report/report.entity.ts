@@ -7,10 +7,12 @@ import {
     ManyToOne,
     OneToMany,
     PrimaryGeneratedColumn,
+    Unique,
     UpdateDateColumn,
 } from "typeorm";
 
 @Entity("report")
+@Unique(["date"])
 export class Report {
     @PrimaryGeneratedColumn("increment", { type: "int", unsigned: true })
     id: number;
@@ -28,6 +30,8 @@ export class Report {
     @ManyToOne(() => User, (user) => user.reports)
     user: User;
 
-    @OneToMany(() => ReportDuty, (reportDuty) => reportDuty.report)
+    @OneToMany(() => ReportDuty, (reportDuty) => reportDuty.report, {
+        cascade: true,
+    })
     reportDuties: ReportDuty[];
 }
