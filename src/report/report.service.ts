@@ -7,6 +7,7 @@ import { getDayFromString } from "src/duty/helpers/duty-save-error-handler";
 import { ReportDuty } from "src/report-duty/report-duty.entity";
 import { User } from "src/user/user.entity";
 import { Request } from "express";
+import { UpdateReportDutyStatusDto } from "./dto/update-report-duty-status.dto";
 
 const dutyPicker = ({ duty, isDone }: ReportDuty) => ({ ...duty, isDone });
 const reportPicker = ({ createdAt, date, id, updatedAt, user }: Report) => ({
@@ -119,12 +120,44 @@ export class ReportService {
 
         const updatedReport = await this.reportRepository.findOne({
             where: { id: reportId },
-            relations: ["user", "reportDuties", "reportDuties.duty"], // Load required relations for response
+            relations: ["user", "reportDuties", "reportDuties.duty"],
         });
 
         return constructReportResponse(
             updatedReport,
             updatedReport.reportDuties,
+        );
+    }
+
+    async updateReportDutyStatus(
+        reportId: number,
+        dutyId: number,
+        isDone: boolean,
+    ) {
+        const reportDuty = await this.reportDutyRepository.findOne({
+            where: { dutyId, reportId },
+        });
+
+        if (!reportDuty) {
+            throw new NotFoundException(
+                `Duty with id ${dutyId} is not part of the report with id ${reportId}`,
+            );
+        }
+
+        reportDuty.isDone = isDone;
+
+        await this.reportDutyRepository.save(reportDuty);
+    }
+
+    async updateReportDutiesStatus(
+        reportId: number,
+        items: UpdateReportDutyStatusDto[],
+    ) {
+        await Promise.all(
+            items.map(
+                async ({ dutyId, isDone }) =>
+                    await this.updateReportDutyStatus(reportId, dutyId, isDone),
+            ),
         );
     }
 }

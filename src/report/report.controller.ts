@@ -3,8 +3,9 @@ import { ReportService } from "./report.service";
 import { ApiOkResponse, ApiTags } from "@nestjs/swagger";
 import { Auth } from "src/auth/auth.decorator";
 import { Request } from "express";
-import { IsAdmin } from "src/guards/guards.decorator";
+import { CanEditReport, IsAdmin } from "src/guards/guards.decorator";
 import { AssignReportDto } from "./dto/assign-report.dto";
+import { UpdateReportDutyStatusDto } from "./dto/update-report-duty-status.dto";
 
 @ApiTags()
 @Controller("report")
@@ -27,5 +28,15 @@ export class ReportController {
         @Body() { userId }: AssignReportDto,
     ) {
         return this.reportService.assignReportToUser(userId, reportId);
+    }
+
+    @ApiOkResponse({ type: String, description: "No Content" })
+    @CanEditReport()
+    @Put(":reportId")
+    async updateReportDutiesStatus(
+        @Param("reportId") reportId: number,
+        @Body() items: UpdateReportDutyStatusDto[],
+    ) {
+        return this.reportService.updateReportDutiesStatus(reportId, items);
     }
 }
