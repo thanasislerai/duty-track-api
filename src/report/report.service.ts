@@ -63,10 +63,14 @@ export class ReportService {
         const today = new Date();
         const dayOfWeek = getDayFromString(format(today, "EEEE"));
         const dailyDuties = await this.dutyRepository.find({
-            where: { frequency: DutyFrequency.DAILY },
+            where: { frequency: DutyFrequency.DAILY, enabled: true },
         });
         const weeklyDuties = await this.dutyRepository.find({
-            where: { frequency: DutyFrequency.WEEKLY, weeklyOn: dayOfWeek },
+            where: {
+                frequency: DutyFrequency.WEEKLY,
+                weeklyOn: dayOfWeek,
+                enabled: true,
+            },
         });
         const report = this.reportRepository.create({
             user,

@@ -1,7 +1,9 @@
 import {
     Allow,
+    IsBoolean,
     IsEnum,
     IsNotEmpty,
+    IsOptional,
     IsString,
     MaxLength,
 } from "class-validator";
@@ -18,4 +20,8 @@ export class CreateDutyDto {
 
     @Allow()
     weeklyOn: Day;
+
+    @IsBoolean()
+    @IsOptional()
+    enabled?: boolean;
 }

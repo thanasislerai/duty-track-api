@@ -51,6 +51,13 @@ export class Duty {
     })
     weeklyOn: Day | null;
 
+    @Column({
+        nullable: false,
+        type: "boolean",
+        default: true,
+    })
+    enabled: boolean;
+
     @CreateDateColumn()
     createdAt: Date;
 
