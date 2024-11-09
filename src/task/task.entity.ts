@@ -1,19 +1,17 @@
-import { ReportDuty } from "src/report-duty/report-duty.entity";
 import {
-    Entity,
     Column,
-    PrimaryGeneratedColumn,
     CreateDateColumn,
+    Entity,
+    PrimaryGeneratedColumn,
     UpdateDateColumn,
-    OneToMany,
 } from "typeorm";
 
-export enum DutyFrequency {
+export enum TaskFrequency {
     DAILY = "daily",
     WEEKLY = "weekly",
 }
 
-export enum Day {
+export enum WeekDay {
     MONDAY = "Monday",
     TUESDAY = "Tuesday",
     WEDNESDAY = "Wednesday",
@@ -23,47 +21,46 @@ export enum Day {
     SUNDAY = "Sunday",
 }
 
-@Entity()
-export class Duty {
+@Entity("task")
+export class Task {
     @PrimaryGeneratedColumn("increment", { type: "int", unsigned: true })
     id: number;
 
-    @Column({
-        nullable: false,
-        type: "varchar",
-        unique: true,
-        length: 200,
-    })
-    title: string;
+    @Column({ type: "text", nullable: false })
+    description: string;
 
     @Column({
         nullable: false,
         type: "enum",
-        enum: DutyFrequency,
+        enum: TaskFrequency,
     })
-    frequency: DutyFrequency;
+    frequency: TaskFrequency;
 
     @Column({
         nullable: true,
         type: "enum",
-        enum: Day,
+        enum: WeekDay,
         default: null,
     })
-    weeklyOn: Day | null;
+    weekDay: WeekDay | null;
 
     @Column({
-        nullable: false,
         type: "boolean",
+        nullable: false,
         default: true,
     })
     enabled: boolean;
+
+    @Column({
+        type: "boolean",
+        nullable: false,
+        default: false,
+    })
+    deleted: boolean;
 
     @CreateDateColumn()
     createdAt: Date;
 
     @UpdateDateColumn()
     updatedAt: Date;
-
-    @OneToMany(() => ReportDuty, (reportDuty) => reportDuty.duty)
-    reportDuties: ReportDuty[];
 }

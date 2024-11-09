@@ -16,7 +16,7 @@ export class IsAdminGuard extends JwtAuthGuard implements CanActivate {
         const user = request.user as User;
 
         if (!user.isAdmin) {
-            throw new ForbiddenException("Access denied: You are not an admin");
+            throw new ForbiddenException("Δεν έχετε δικαιώματα διαχειριστή");
         }
 
         return true;
