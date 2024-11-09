@@ -5,12 +5,17 @@ import {
     IsNotEmpty,
     IsOptional,
     IsString,
+    MaxLength,
 } from "class-validator";
 import { TaskFrequency, WeekDay } from "../task.entity";
 
 export class CreateTaskDto {
+    @MaxLength(400, {
+        message:
+            "Η περιγραφή του καθήκοντος θα πρέπει να περιέχει το πολύ 400 χαρακτήρες",
+    })
     @IsNotEmpty({ message: "Η περιγραφή του task δεν μπορεί να είναι κενή" })
-    @IsString()
+    @IsString({ message: "Μη έγκυρη περιγραφή task" })
     description: string;
 
     @IsEnum(TaskFrequency, {

@@ -29,10 +29,16 @@ export const getDayFromString = (weekDay: string): WeekDay => {
     }
 };
 
-export const dutySaveErrorHandler = (
+export const taskSaveErrorHandler = (
     dto: CreateTaskDto | UpdateTaskDto,
     error: any,
 ) => {
+    if (error?.code === "ER_DUP_ENTRY") {
+        throw new BadRequestException(
+            "Υπάρχει ήδη ένα καθήκον με αυτήν την περιγραφή",
+        );
+    }
+
     if (error.sqlMessage?.includes("week_day_chk")) {
         if (dto.frequency === TaskFrequency.DAILY && !!dto.weekDay) {
             throw new BadRequestException(

@@ -26,7 +26,7 @@ export class Task {
     @PrimaryGeneratedColumn("increment", { type: "int", unsigned: true })
     id: number;
 
-    @Column({ type: "text", nullable: false })
+    @Column({ type: "varchar", length: 200, unique: true, nullable: false })
     description: string;
 
     @Column({
