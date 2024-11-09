@@ -8,6 +8,7 @@ import {
     UserLoginResponseDto,
     UserResponseDto,
 } from "./dto/user-login-response.dto";
+import { Request } from "express";
 
 @Injectable()
 export class UserService {
@@ -46,17 +47,20 @@ export class UserService {
             { secret: process.env.JWT_SECRET },
         );
 
-        const userResponse: UserResponseDto = {
-            id: user.id,
-            userName: user.userName,
-            isAdmin: user.isAdmin,
-            createdAt: user.createdAt,
-            updatedAt: user.updatedAt,
-        };
-
         return {
             token,
-            user: userResponse,
+        };
+    }
+
+    async getUserProfile(request: Request): Promise<UserResponseDto> {
+        const user = request.user as User;
+
+        return {
+            id: user.id,
+            isAdmin: user.isAdmin,
+            userName: user.userName,
+            createdAt: user.createdAt,
+            updatedAt: user.updatedAt,
         };
     }
 }
