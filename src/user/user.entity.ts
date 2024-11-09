@@ -8,7 +8,7 @@ import {
 
 @Entity("user")
 export class User {
-    @PrimaryGeneratedColumn("increment", { type: "bigint", unsigned: true })
+    @PrimaryGeneratedColumn("increment", { type: "int", unsigned: true })
     id: number;
 
     @Column({ type: "varchar", length: 200, unique: true, nullable: false })
