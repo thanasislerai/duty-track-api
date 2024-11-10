@@ -13,7 +13,6 @@ import { IsAdmin } from "src/guards/guards.decorator";
 import { CreateTaskDto } from "./dto/create-task.dto";
 import { Task } from "./task.entity";
 import { UpdateTaskDto } from "./dto/update-task.dto";
-import { Auth } from "src/auth/auth.decorator";
 
 @ApiTags()
 @Controller("task")
@@ -21,14 +20,14 @@ export class TaskController {
     constructor(private readonly taskService: TaskService) {}
 
     @ApiOkResponse({ type: [Task] })
-    @Auth()
+    @IsAdmin()
     @Get()
     async getTasks() {
         return await this.taskService.getTasks();
     }
 
     @ApiOkResponse({ type: Task })
-    @Auth()
+    @IsAdmin()
     @Get(":id")
     async getTask(@Param("id") id: number) {
         return await this.taskService.getTask(id);
